@@ -27,16 +27,16 @@ void setup(){ //<>//
     
     float ran =  random(0,1);
   
-    if(ran <= .01){
+    if(ran <= .2){
       quimicoA[i] = 1;
       quimicoB[i][0] = 0;
       quimicoB[i][1] = 0;
       vacio[i] = 0;
     }
-    else if (ran <= .9){
+    else if (ran <= .98){
       quimicoA[i] = 0;
       quimicoB[i][0] = 1;
-      quimicoB[i][1] = 3;
+      quimicoB[i][1] = 20;
       vacio[i] = 0;
     }
     else{      
@@ -79,7 +79,7 @@ for(int i = 0; i < pixels.length; i ++){
         if((i + 1 < pixels.length && i - 1 >=0 && i + width < pixels.length && i - width >= 0) /*<--Evitar errores*/&& quimicoA[i] == 1 && (quimicoB[i+1][0] == 1 || quimicoB[i - width][0] == 1 || quimicoB[i + width][0] == 1 || quimicoB[i - 1][0] == 1)){
           siguienteQuimicoA[i] = 0;
           siguienteQuimicoB[i][0] = 1;
-          siguienteQuimicoB[i][1] = 3;
+          siguienteQuimicoB[i][1] = 20;
           ConteoMuertesYellow += 1;
         }
       //Si existe hueco para expandirse A pasa a ser 1
