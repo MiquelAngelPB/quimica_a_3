@@ -31,13 +31,13 @@ void setup(){ //<>//
     float ran =  random(0,1);
     
     //Variables de inicio
-    if(ran <= .2){
+    if(ran <= .001){
       quimicoA[i] = 1;
       quimicoB[i][0] = 0;
       quimicoB[i][1] = 0;
       vacio[i] = 0;
     }
-    else if (ran <= .98){
+    else if (ran <= .9001){
       quimicoA[i] = 0;
       quimicoB[i][0] = 1;
       quimicoB[i][1] = 2;
