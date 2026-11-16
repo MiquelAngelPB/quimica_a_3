@@ -27,16 +27,16 @@ void setup(){ //<>//
     
     float ran =  random(0,1);
   
-    if(ran <= .500){
+    if(ran <= .01){
       quimicoA[i] = 1;
       quimicoB[i][0] = 0;
       quimicoB[i][1] = 0;
       vacio[i] = 0;
     }
-    else if (ran <= .666){
+    else if (ran <= .9){
       quimicoA[i] = 0;
       quimicoB[i][0] = 1;
-      quimicoB[i][1] = 100;
+      quimicoB[i][1] = 3;
       vacio[i] = 0;
     }
     else{      
@@ -50,9 +50,14 @@ void setup(){ //<>//
 }
 
 void draw(){
-  delay(100);
-  
-  color yellow = color(255, 255, 0);
+  //delay(100);
+for(int i = 0; i < pixels.length; i ++){
+  siguienteQuimicoA[i] = quimicoA[i];
+  siguienteQuimicoB[i][0] = quimicoB[i][0];
+  siguienteQuimicoB[i][1] = quimicoB[i][1];
+  siguienteVacio[i] = vacio[i];
+}
+  color yellow = color(55);
   color black =  color(0,0,0);
   
   loadPixels();
@@ -74,7 +79,7 @@ void draw(){
         if((i + 1 < pixels.length && i - 1 >=0 && i + width < pixels.length && i - width >= 0) /*<--Evitar errores*/&& quimicoA[i] == 1 && (quimicoB[i+1][0] == 1 || quimicoB[i - width][0] == 1 || quimicoB[i + width][0] == 1 || quimicoB[i - 1][0] == 1)){
           siguienteQuimicoA[i] = 0;
           siguienteQuimicoB[i][0] = 1;
-          siguienteQuimicoB[i][1] = 100;
+          siguienteQuimicoB[i][1] = 3;
           ConteoMuertesYellow += 1;
         }
       //Si existe hueco para expandirse A pasa a ser 1
@@ -84,8 +89,8 @@ void draw(){
           siguienteQuimicoB[i][1] = 0;
           siguienteVacio[i] = 0;
         }
-        //Si 
-        else if((i + 1 < pixels.length && i - 1 >=0 && i + width < pixels.length && i - width >= 0)  /*<--Evitar errores*/ && quimicoB[i][1] == 0){
+        //Si el quimico lifespan == 0 muere
+        else if((i + 1 < pixels.length && i - 1 >=0 && i + width < pixels.length && i - width >= 0)  /*<--Evitar errores*/ && quimicoB[i][0] == 1 &&  quimicoB[i][1] <= 1){
           siguienteQuimicoA[i] = 0;
           siguienteQuimicoB[i][0] = 0;
           siguienteQuimicoB[i][1] = 0;
