@@ -15,10 +15,13 @@ void setup(){ //<>//
   size(500,500, JAVA2D);
   
   loadPixels();
+
+  //Crea la array principal
   quimicoA = new int[pixels.length];
   quimicoB = new int[pixels.length][2];
   vacio = new int[pixels.length];
   
+  //Crea la array buffer
   siguienteQuimicoA = new int[pixels.length];
   siguienteQuimicoB = new int[pixels.length][2];
   siguienteVacio = new int[pixels.length];
@@ -26,7 +29,8 @@ void setup(){ //<>//
   for(int i = 0; i < pixels.length; i++){
     
     float ran =  random(0,1);
-  
+    
+    //Variables de inicio
     if(ran <= .2){
       quimicoA[i] = 1;
       quimicoB[i][0] = 0;
@@ -36,7 +40,7 @@ void setup(){ //<>//
     else if (ran <= .98){
       quimicoA[i] = 0;
       quimicoB[i][0] = 1;
-      quimicoB[i][1] = 20;
+      quimicoB[i][1] = 2;
       vacio[i] = 0;
     }
     else{      
@@ -51,17 +55,24 @@ void setup(){ //<>//
 
 void draw(){
   //delay(100);
+
+
+//Actualiza el buffer al valor anterior.
 for(int i = 0; i < pixels.length; i ++){
   siguienteQuimicoA[i] = quimicoA[i];
   siguienteQuimicoB[i][0] = quimicoB[i][0];
   siguienteQuimicoB[i][1] = quimicoB[i][1];
   siguienteVacio[i] = vacio[i];
 }
+  //Colores de los quimicos
   color yellow = color(55);
   color black =  color(0,0,0);
   
   loadPixels();
+  //Bucle de reacciones
   for(int i = 0; i < pixels.length; i++){
+
+    //Añade los colores a los pixeles segun su quimico.
     if(quimicoA[i] == 1 && quimicoB[i][0] == 0){
       pixels[i] = yellow;
     }
@@ -72,14 +83,14 @@ for(int i = 0; i < pixels.length; i ++){
       pixels[i] = color(255,255,255);
     }
     
-
+    //Evita errores out of index
     try{ 
       
       //Si cualquiera de los pixeles que toca quimico A[i] es B, [i] pasa a ser B.
         if((i + 1 < pixels.length && i - 1 >=0 && i + width < pixels.length && i - width >= 0) /*<--Evitar errores*/&& quimicoA[i] == 1 && (quimicoB[i+1][0] == 1 || quimicoB[i - width][0] == 1 || quimicoB[i + width][0] == 1 || quimicoB[i - 1][0] == 1)){
           siguienteQuimicoA[i] = 0;
           siguienteQuimicoB[i][0] = 1;
-          siguienteQuimicoB[i][1] = 20;
+          siguienteQuimicoB[i][1] = 2;
           ConteoMuertesYellow += 1;
         }
       //Si existe hueco para expandirse A pasa a ser 1
@@ -107,6 +118,7 @@ for(int i = 0; i < pixels.length; i ++){
 
   }
 
+  //Bucle de actualizacion de array primaria con valores de buffer.
   for(int i = 0; i < pixels.length; i++){
     quimicoA[i] = siguienteQuimicoA[i];
     quimicoB[i][0] = siguienteQuimicoB[i][0];
@@ -115,6 +127,7 @@ for(int i = 0; i < pixels.length; i ++){
     }
     vacio[i] = siguienteVacio[i];
 
+    //Reinicio buffer
     siguienteQuimicoA[i] = 0;
     siguienteVacio[i] = 0;
     siguienteQuimicoB[i][0] = 0;
@@ -124,6 +137,6 @@ for(int i = 0; i < pixels.length; i ++){
 
   updatePixels();
 
-  println("Black quimic anihilated: ",ConteoMuertesBlack, "Yellow quimic anihilation: ", ConteoMuertesYellow, "Voids: ", Vacios);
+  //println("Black quimic anihilated: ",ConteoMuertesBlack, "Yellow quimic anihilation: ", ConteoMuertesYellow, "Voids: ", Vacios);
 
 }
