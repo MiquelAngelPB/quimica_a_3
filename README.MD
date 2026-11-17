@@ -6,4 +6,15 @@ Química A3 es un celular autómata que simula 2 químicos interactuando entre s
 --- 
 1. **Quimico A:** Busca una casilla vacia en sus 4 ejes (Arriba - Abajo - Izquierda - Derecha) y, si encuentra uno, se expande.
 
-2. **Quimico B:** Busca si hay *Quimico A*
+2. **Quimico B:** Busca si hay Quimico A en cualquiera de las casillas adjacentes, si lo encuentra lo aniquila y ocupa el espacio.
+
+3. **Life span:** Cada quimico B tiene un tiempo de vida definido, es un valor que asignamos en configuracion del entorno, cada ciclo le resta un punto de vida. Cuando su life span es de 0, muere, dejando vacio detras.
+
+---
+
+### TABLA DE REACCIONES:
+
+|           |Quimico A|Quimico B|
+|-----------|---------|---------|
+|Quimico A  |  nada   |  muere  |
+|Quimico B  |  Mata   |  nada   |
