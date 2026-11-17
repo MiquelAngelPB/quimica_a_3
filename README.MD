@@ -18,3 +18,16 @@ Química A3 es un celular autómata que simula 2 químicos interactuando entre s
 |-----------|---------|---------|
 |Quimico A  |  nada   |  muere  |
 |Quimico B  |  Mata   |  nada   |
+
+### Variables de configuración:
+Podemos encontrar estas variabeles en "configuracion de estado inicial":
+- ``` lifeSpan ``` Ajusta el tiempo de vida de quimico B.
+- ``` spawnPercentB ``` Ajusta el spawnrate del quimico B.
+- ``` spawnPercentA ``` Ajusta el spawnrate del quimico A.
+
+### Buffer de reacciones:
+El bufer de reacciones almacena una copia temporal de las array antes y despues de su reaccion.
+
+Es decir antes de que a reaccione se le pasa su estado actual, para una vez hecho el calculo de la reaccion, actualizar ese estado como estado siguiente.
+
+Asi evitamos errores de solapado de estados y conservacion de estados ya no validos.

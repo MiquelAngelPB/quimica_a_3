@@ -10,6 +10,11 @@ int ConteoMuertesBlack = 0;
 int ConteoMuertesYellow = 0;
 int Vacios = 0;
 
+//CONFIGURACION DE ESTADO INICIAL:
+int lifeSpan = 1;
+float spawnPercentA = .890;
+float spawnPercentB = .891;
+
 
 void setup(){ //<>//
   size(500,500, JAVA2D);
@@ -31,16 +36,16 @@ void setup(){ //<>//
     float ran =  random(0,1);
     
     //Variables de inicio
-    if(ran <= .001){
+    if(ran <= spawnPercentA){
       quimicoA[i] = 1;
       quimicoB[i][0] = 0;
       quimicoB[i][1] = 0;
       vacio[i] = 0;
     }
-    else if (ran <= .9001){
+    else if (ran <= spawnPercentB){
       quimicoA[i] = 0;
       quimicoB[i][0] = 1;
-      quimicoB[i][1] = 2;
+      quimicoB[i][1] = lifeSpan;
       vacio[i] = 0;
     }
     else{      
@@ -90,7 +95,7 @@ for(int i = 0; i < pixels.length; i ++){
         if((i + 1 < pixels.length && i - 1 >=0 && i + width < pixels.length && i - width >= 0) /*<--Evitar errores*/&& quimicoA[i] == 1 && (quimicoB[i+1][0] == 1 || quimicoB[i - width][0] == 1 || quimicoB[i + width][0] == 1 || quimicoB[i - 1][0] == 1)){
           siguienteQuimicoA[i] = 0;
           siguienteQuimicoB[i][0] = 1;
-          siguienteQuimicoB[i][1] = 2;
+          siguienteQuimicoB[i][1] = lifeSpan;
           ConteoMuertesYellow += 1;
         }
       //Si existe hueco para expandirse A pasa a ser 1
