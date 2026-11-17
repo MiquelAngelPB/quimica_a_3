@@ -14,10 +14,10 @@ Química A3 es un celular autómata que simula 2 químicos interactuando entre s
 
 ### TABLA DE REACCIONES:
 
-|           |Quimico A|Quimico B|
-|-----------|---------|---------|
-|Quimico A  |  nada   |  muere  |
-|Quimico B  |  Mata   |  nada   |
+|           |Quimico A|Quimico B|    Vacio   |
+|-----------|---------|---------|------------|
+|Quimico A  |  Nada   |  Muere  | Se expande |
+|Quimico B  |  Mata   |  Nada   |    Nada    |
 
 ### Variables de configuración:
 Podemos encontrar estas variabeles en "configuracion de estado inicial":
